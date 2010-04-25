@@ -29,7 +29,9 @@
       "`": "~", "1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&",
       "8": "*", "9": "(", "0": ")", "-": "_", "=": "+", ";": ": ", "'": "\"", ",": "<",
       ".": ">",  "/": "?",  "\\": "|"
-    }
+    },
+
+    inputBinding: false
   };
 
   function keyHandler( handleObj ) {
@@ -43,8 +45,8 @@
 
     handleObj.handler = function( event ) {
       // Don't fire in text-accepting inputs that we didn't directly bind to
-      if ( this !== event.target && (/textarea|select/i.test( event.target.nodeName ) ||
-         event.target.type === "text") ) {
+      if ( !jQuery.hotkeys.inputBinding && this !== event.target &&
+            (/textarea|select/i.test( event.target.nodeName ) || event.target.type === "text") ) {
         return;
       }
 
