@@ -29,9 +29,8 @@
       "`": "~", "1": "!", "2": "@", "3": "#", "4": "$", "5": "%", "6": "^", "7": "&",
       "8": "*", "9": "(", "0": ")", "-": "_", "=": "+", ";": ": ", "'": "\"", ",": "<",
       ".": ">",  "/": "?",  "\\": "|"
-    },
+    }
 
-    inputBinding: false
   };
 
   function keyHandler( handleObj ) {
@@ -39,13 +38,18 @@
     if ( typeof handleObj.data !== "string" ) {
       return;
     }
-
+    
     var origHandler = handleObj.handler,
       keys = handleObj.data.toLowerCase().split(" ");
-
+    
+    // Specify inputBinding expando property on the original handler function.
+    if ( typeof origHandler.inputBinding == "undefined" ) {
+        origHandler.inputBinding = false;
+    } 
+    
     handleObj.handler = function( event ) {
       // Don't fire in text-accepting inputs that we didn't directly bind to
-      if ( !jQuery.hotkeys.inputBinding && this !== event.target &&
+      if ( !origHandler.inputBinding && this !== event.target &&
             (/textarea|select/i.test( event.target.nodeName ) || event.target.type === "text") ) {
         return;
       }

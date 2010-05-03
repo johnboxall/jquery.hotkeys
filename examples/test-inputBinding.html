@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <script src="jquery-1.4.2.js"></script>
+        <script src="../jquery.hotkeys.js"></script>
+    </head>
+
+    <body>
+        <p>Try ctrl+s while focused in the input.</p>
+        <input type="text" />
+
+        <script>
+            function bindCtrlSInInput(){
+                    alert("Ctrl+S");
+                    return false;
+            }
+            bindCtrlSInInput.inputBinding = true;
+            
+            $(document).ready(function(){
+                $(document).bind('keydown', 'ctrl+s', bindCtrlSInInput);
+            });
+
+        </script>
+    </body></html>
