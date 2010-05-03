@@ -5,7 +5,8 @@
     </head>
 
     <body>
-        <p>Try ctrl+s while focused in the input.</p>
+        <p>Try ctrl+s while focused in the input. It should fire.</p>
+        <p>Try ctrl+z while focused in the input. It should _not_ fire.</p>
         <input type="text" />
 
         <script>
@@ -17,6 +18,10 @@
             
             $(document).ready(function(){
                 $(document).bind('keydown', 'ctrl+s', bindCtrlSInInput);
+                $(document).bind('keydown', 'ctrl+z', function(){
+                    alert("Ctrl+Z");
+                    return false;
+                });
             });
 
         </script>
